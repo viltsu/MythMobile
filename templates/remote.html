@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div data-role="page" id="remote">
+    <div data-role="header">
+        <a href="#main" data-rel="back" data-icon="back">Back</a>
+
+        <h1>MythTV - Remote</h1>
+        <a href="/settings" data-icon="gear" class="ui-btn-right">Options</a>
+    </div>
+    <div data-role="content" id="remotecontent">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <select name="jumpto" id="jumpto">
+                    <option value="">Jump-to</option>
+                    <option value="playbackrecordings">Recordings</option>
+                    <option value="mythvideo">Videos</option>
+                    <option value="livetv">Live TV</option>
+                    <option value="playdvd">Play DVD</option>
+                </select>
+            </div>
+            <div class="ui-block-b">
+                <a href="#escape" data-role="button">Esc</a>
+            </div>
+        </div>
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#s" data-role="button" data-iconpos="top">EPG</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#up" data-role="button" data-icon="arrow-u" data-iconpos="top">UP</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#m" data-icon="gear" data-role="button" data-iconpos="top">Menu</a>
+            </div>
+        </div>
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#left" data-icon="arrow-l" data-iconpos="top" data-role="button">LEFT</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#return" data-theme="b" data-icon="check" data-iconpos="top" data-role="button">OK</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#right" data-icon="arrow-r" data-iconpos="top" data-role="button">RIGHT</a>
+            </div>
+        </div>
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#p" data-role="button" data-iconpos="top">||</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#down" data-icon="arrow-d" data-iconpos="top" data-role="button">DOWN</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#i" data-role="button" data-iconpos="top">Play all</a>
+            </div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="#f10" data-icon="minus" data-iconpos="top" data-role="button">Vol</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#f11" data-icon="plus" data-iconpos="top" data-role="button">Vol</a>
+            </div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="#" data-role="button">Sub</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#r" data-role="button">Rec</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

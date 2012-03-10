@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div data-role="page" id="recording" data-dom-cache="true">
+    <div data-role="header">
+        <a href="#main" data-rel="back" data-icon="back">Back</a>
+
+        <h1>{{ item.title }} - MythTV</h1>
+        <a href="/settings" data-icon="gear" class="ui-btn-right">Options</a>
+    </div>
+    <div data-role="content">
+        <h1>{{ item.title }}</h1>
+
+        <h2>{{ item.suptitle }}</h2>
+        <img src="{{ item.pic }}" alt="screenshot"/>
+
+        <p>
+            {{ item.description }}
+        </p>
+
+        <p>
+            {{ item.plot }}
+        </p>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a id="on-frontend" href="{{ item.feplay }}" data-icon="arrow-r" data-iconpos="right"
+                   data-role="button">frontend</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-icon="arrow-r" data-iconpos="right" data-role="button">play</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

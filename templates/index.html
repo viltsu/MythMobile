@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div data-role="page" id="main">
+    <div data-role="header">
+        <h1>MythTV</h1>
+        <a href="/settings" data-icon="gear" class="ui-btn-right" data-dom-cache="true" data-prefetch="true">Options</a>
+    </div>
+    <div data-role="content" data-position="fixed">
+        <a href="/recordings" data-icon="arrow-r" data-iconpos="right" data-role="button">Recordings</a>
+        <a href="/videos" data-icon="arrow-r" data-iconpos="right" data-role="button">Videos</a>
+        <a href="/list" data-icon="arrow-r" data-iconpos="right" data-role="button">TV Guide</a>
+        <a href="/remote" data-icon="arrow-r" data-iconpos="right" data-role="button">Remote</a>
+        <a href="/settings" data-icon="gear" data-iconpos="right" data-role="button" data-dom-cache="true"
+           data-prefetch="true">Options</a>
+    </div>
+</div>
+{% endblock %}

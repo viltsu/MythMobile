@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div data-role="page" id="recordings" data-dom-cache="true">
+    <div data-role="header">
+        <a href="#main" data-rel="back" data-icon="back">Back</a>
+
+        <h1>{{ page_title }} - MythTV</h1>
+        <a href="/settings" data-icon="gear" class="ui-btn-right">Options</a>
+    </div>
+    <div data-role="content">
+        {% if empty is defined %}
+        <h1>No recordings found</h1>
+        {% else %}
+        <ul data-role="listview" data-filter="true">
+            {% for item in items %}
+            <li>
+                <a href="{{ item.url|urlize() }}">{{ item.label }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

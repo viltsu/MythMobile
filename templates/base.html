@@ -1,0 +1,110 @@
+<!doctype HTML>
+<html>
+<head>
+    <title>MythTV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <link rel="stylesheet" href="/static/stylesheets/jquery.mobile-1.0.min.css"/>
+    <script src="/static/javascripts/jquery-1.6.4.min.js"></script>
+    <script src="/static/javascripts/jquery.mobile-1.0.1.min.js"></script>
+    <script>
+        var frontend = "127.0.0.1";
+        var loaded = false;
+
+        function pop_error_msg(message) {
+            $("<div id='notification' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>" + message + "</h1></div>").css({
+                "display":"block",
+                "opacity":0.96,
+                "top":$(window).scrollTop() + 100
+            }).appendTo($.mobile.pageContainer).delay(1800).fadeOut(800, function () {
+                        $(this).remove();
+                    });
+        }
+
+        function loadLocalStorage() {
+            if (typeof (localStorage) == 'undefined' && !loaded) {
+                return;
+            }
+            loaded = true;
+
+            var val = localStorage.getItem('frontend');
+            if (val != null) {
+                frontend = val;
+            }
+
+        }
+
+        function setLocalStorage(key, value) {
+            if (typeof (localStorage) == 'undefined' && !loaded) {
+                return;
+            }
+            localStorage.setItem(key, value);
+        }
+
+        function sendKey(key) {
+            var url = "/remote/" + frontend;
+            $.ajax({
+                type: "POST",
+                url: url,                date: {'key': key},
+                error: function() {
+                    pop_error_msg('Failed to send commands to ' + frontend);
+                }
+            })
+        }
+
+        $(function () {
+
+            $('body').bind("swiperight", function (event) {
+                history.back();
+                return false;
+            });
+            loadLocalStorage();
+        });
+
+        $(document).delegate("#remote", "pagecreate", function () {
+            $('#remotecontent a').click(function () {
+                var key = $(this).attr('href').substr(1);
+                sendKey(key)
+            });
+            $('#jumpto').change(function () {
+                var key = "jumpto:" + $(this).val();
+                sendKey(key)
+            });
+
+        });
+
+        $(document).delegate("#settings", "pagecreate", function () {
+            loadLocalStorage();
+
+            $('#settings input[name=frontend]').change(function () {
+                frontend = $('#settings input[name=frontend]:checked').val();
+                setLocalStorage('frontend', frontend);
+            });
+            var selectedFrontend = $('#settings input[name=frontend]:radio[value="' + frontend + '"]');
+            if (selectedFrontend.length) {
+                selectedFrontend.attr('checked', true);
+            } else {
+
+                //pop_error_msg("No frontend with right host found");
+            }
+
+        });
+
+        $(document).delegate("#recording", "pagecreate", function () {
+            $('#on-frontend').click(function () {
+                var anchor = $(this);
+                $.post(anchor.attr('href'), {
+                            'frontend':frontend
+                        },
+                        function () {
+                            $.mobile.changePage("/remote", "slideup");
+                        });
+                return false;
+            });
+        });
+
+    </script>
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>
